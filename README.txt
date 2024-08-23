@@ -1,4 +1,4 @@
-﻿Version 1: 12-2-2024
+﻿Version 1: 23-8-2024
 
 A seachengine that consist of an indexer and a search program.
 
