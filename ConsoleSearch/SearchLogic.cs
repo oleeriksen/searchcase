@@ -15,6 +15,8 @@ namespace ConsoleSearch
             mDatabase = database;
         }
 
+        public bool IsCaseSensitive { get; set; } = true;
+        
         /* Perform search of documents containing words from query. The result will
          * contain details about amost maxAmount of documents.
          */
@@ -23,9 +25,9 @@ namespace ConsoleSearch
             List<string> ignored;
 
             DateTime start = DateTime.Now;
-
+            
             // Convert words to wordids
-            var wordIds = mDatabase.GetWordIds(query, out ignored);
+            var wordIds = mDatabase.GetWordIds(query, IsCaseSensitive, out ignored);
 
             // perform the search - get all docIds
             var docIds =  mDatabase.GetDocuments(wordIds);

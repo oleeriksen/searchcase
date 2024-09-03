@@ -19,5 +19,9 @@ namespace Indexer
         void InsertAllWords(Dictionary<string, int> words);
 
         void InsertAllOcc(int docId, ISet<int> wordIds);
+        
+        // Get all words with key as the value, and the value as the
+        //count of each 
+        List<Term> GetAllWordCounts();
     }
 }

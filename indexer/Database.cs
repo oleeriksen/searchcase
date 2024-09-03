@@ -167,5 +167,27 @@ namespace Indexer
             }
             return -1;
         }
+        
+        public List<Term> GetAllWordCounts()
+        {
+            var selectCmd = _connection.CreateCommand();
+            selectCmd.CommandText = "select Occ.wordId as Id, count(occ.wordId) as countWord, Word.name as Name "+
+                                    "from Occ JOIN Word on Occ.wordId = Word.id " + 
+                                    "group by Occ.wordId order by countWord DESC";
+
+            List<Term> result = new();
+            using (var reader = selectCmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var id = reader.GetInt32(0);
+                    var cc = reader.GetInt32(1);
+                    var name = reader.GetString(2);
+
+                    result.Add(new Term { Id = id, Value = name, Count = cc});
+                }
+            }
+            return result;
+        }
     }
 }
